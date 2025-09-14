@@ -47,22 +47,27 @@ const projectSchema = new mongoose.Schema({
 }, { _id: true }); // Ensure _id is generated
 
 const skillSchema = new mongoose.Schema({
-    languages: [{
+    General: [{
         name: String,
         icon: String,
         color: String,
     }],
-    frameworksAndTechnologies: [{
+    "Web Development": [{
         name: String,
         icon: String,
         color: String,
     }],
-    toolsAndPlatforms: [{
+    "Mobile Development": [{
         name: String,
         icon: String,
         color: String,
     }],
-    databases: [{
+    Databases: [{
+        name: String,
+        icon: String,
+        color: String,
+    }],
+    "DevOps & Tools": [{
         name: String,
         icon: String,
         color: String,
