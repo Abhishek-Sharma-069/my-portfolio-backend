@@ -9,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5173'], // Allow both React dev server ports
+    origin: ['http://localhost:3000', 'http://localhost:5173','https://abhisheksharma-069.vercel.app'], // Allow both React dev server ports
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
