@@ -7,10 +7,17 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+const clientUrlEnv = process.env.CLIENT_URL;
+const corsOrigins = clientUrlEnv
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+const allowedCorsOrigins = [...new Set([...corsOrigins])];
+
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5173','https://abhisheksharma-069.vercel.app'], // Allow both React dev server ports
-    credentials: true
+    origin: allowedCorsOrigins,
+    credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -45,6 +52,11 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 app.use('/api', portfolioRoutes);
 app.use('/api/auth', authRoutes);
+
+// Root
+app.get('/', (req, res) => {
+    res.json({ message: 'Portfolio API is running' });
+});
 
 // Health check endpoint
 app.get('/health', (req, res) => {
